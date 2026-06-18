@@ -1,0 +1,22 @@
+scenedetect==0.7
+ultralytics==8.4.46
+torch==2.11.0
+torchvision==0.26.0
+tqdm==4.67.3
+yt-dlp
+faster-whisper==1.2.1
+# google-genai replaced by openai (DeepSeek API compatible)
+openai==1.85.0
+python-dotenv==1.2.2
+mediapipe==0.10.14
+boto3==1.43.4
+
+fastapi==0.136.1
+uvicorn==0.46.0
+python-multipart==0.0.27
+httpx==0.28.1
+Pillow==12.2.0
+beautifulsoup4==4.14.3
+google-api-python-client==2.160.0
+google-auth-oauthlib==1.2.1
+google-auth-httplib2==0.2.0

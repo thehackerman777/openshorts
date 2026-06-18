@@ -1,0 +1,54 @@
+# Secrets
+.env
+*.pickle
+*client_secrets*
+*_token.*
+*.pem
+
+# User-generated content + runtime
+data/
+uploads/
+output/
+downloads/
+videos/
+temp_*
+
+# Media files (too large for repo)
+*.gif
+*.mp4
+*.webm
+*.mov
+*.mkv
+*.avi
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node / JS
+node_modules/
+dashboard/node_modules/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Generated metadata
+*_metadata.json
+
+# YOLO models
+*.pt
+
+# Cache
+.cache/
+.config/
+
+# Agent config
+.agents/
+.agent/
+.claude/
+skills/
+skills-lock.json
