@@ -92,7 +92,7 @@ function DragDropZone({ label, accept, onFile, file, onClear, icon: Icon }) {
   );
 }
 
-export default function ThumbnailStudio({ geminiApiKey, uploadPostKey, uploadUserId }) {
+export default function ThumbnailStudio({ geminiApiKey, youtubeConnected, onGoToSettings }) {
   // Step management
   const [step, setStep] = useState(0);
   const [mode, setMode] = useState(null); // 'video' or 'manual'
@@ -443,7 +443,7 @@ export default function ThumbnailStudio({ geminiApiKey, uploadPostKey, uploadUse
 
   // --- Publish to YouTube ---
   const handlePublish = async () => {
-    if (!uploadPostKey || !uploadUserId) return alert('Please configure your Upload-Post API key and user in Settings first.');
+    if (!youtubeConnected) return alert('Por favor, conecta tu canal de YouTube en la pestaña de Configuración primero.');
     const finalTitle = selectedTitle || manualTitle;
     if (!finalTitle) return alert('No title selected.');
     if (!selectedThumbnail) return alert('Please select a thumbnail first.');
@@ -1224,21 +1224,20 @@ export default function ThumbnailStudio({ geminiApiKey, uploadPostKey, uploadUse
                 />
               </div>
 
-              {/* Publish Button */}
-              {(!uploadPostKey || !uploadUserId) ? (
+              {!youtubeConnected ? (
                 <div className="glass-panel p-6 space-y-3">
                   <div className="flex items-center gap-2 text-amber-400">
                     <AlertCircle size={16} />
-                    <span className="text-sm font-medium">Upload-Post Not Configured</span>
+                    <span className="text-sm font-medium">YouTube no Conectado</span>
                   </div>
                   <p className="text-xs text-zinc-500">
-                    To publish directly to YouTube, configure your Upload-Post API key and connect a profile in Settings.
+                    Para publicar directamente en YouTube, debes conectar tu cuenta mediante OAuth en la pestaña de Configuración.
                   </p>
                   <button
-                    onClick={() => { }}
+                    onClick={onGoToSettings}
                     className="text-xs text-primary hover:underline flex items-center gap-1"
                   >
-                    <Settings size={12} /> Go to Settings
+                    <Settings size={12} /> Ir a Configuración
                   </button>
                 </div>
               ) : (

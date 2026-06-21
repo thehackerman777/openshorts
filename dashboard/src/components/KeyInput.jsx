@@ -35,7 +35,7 @@ export default function KeyInput({ onKeySet, savedKey }) {
                             setKey(e.target.value);
                             setIsSaved(false);
                         }}
-                        placeholder="AIzaSy..."
+                        placeholder="sk-..."
                         className="input-field pr-12 font-mono"
                     />
                     <button
@@ -60,12 +60,12 @@ export default function KeyInput({ onKeySet, savedKey }) {
                 Your key is stored locally in your browser for convenience.
                 <br />
                 <a
-                    href="https://aistudio.google.com/app/apikey"
+                    href="https://platform.deepseek.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:underline mt-1 inline-block"
                 >
-                    Get your free DeepSeek API Key here →
+                    Get your DeepSeek API Key here →
                 </a>
             </p>
         </div>

@@ -8,6 +8,9 @@ services:
       - .:/app
       - /app/__pycache__
       - ./output:/app/output
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
     restart: unless-stopped
 
   frontend:
@@ -18,23 +21,6 @@ services:
     volumes:
       - ./dashboard:/app
       - /app/node_modules
-    restart: unless-stopped
-    depends_on:
-      - backend
-
-  renderer:
-    build:
-      context: .
-      dockerfile: render-service/Dockerfile
-    container_name: openshorts-renderer
-    ports:
-      - "3100:3100"
-    volumes:
-      - ./output:/output
-    environment:
-      - REMOTION_BUNDLE_PATH=/app/remotion
-      - OUTPUT_DIR=/output
-      - PORT=3100
     restart: unless-stopped
     depends_on:
       - backend
