@@ -39,13 +39,33 @@ function App() {
   }, [apiKey]);
 
   const handleYoutubeConnect = async () => {
+    // Open a blank tab immediately to preserve user gesture context and prevent browser popup blocking
+    const authWindow = window.open('about:blank', '_blank');
+    if (!authWindow) {
+      alert('El bloqueador de ventanas emergentes impidió abrir la pestaña de Google. Por favor, habilita las ventanas emergentes en tu navegador.');
+      return;
+    }
+
     try {
       const res = await fetch(getApiUrl('/auth/youtube/login'));
+      if (!res.ok) {
+        authWindow.close();
+        const errorData = await res.json();
+        alert(errorData.detail || 'Error al conectar con YouTube. Asegúrate de tener configurado el archivo youtube_client_secrets.json.');
+        return;
+      }
       const data = await res.json();
-      if (data.auth_url) window.open(data.auth_url, '_blank');
-      setShowYoutubeCodeInput(true);
+      if (data.auth_url) {
+        authWindow.location.href = data.auth_url;
+        setShowYoutubeCodeInput(true);
+      } else {
+        authWindow.close();
+        alert('No se pudo generar la URL de autenticación.');
+      }
     } catch(e) {
+      authWindow.close();
       console.error('YouTube connect failed:', e);
+      alert('Error de red al intentar conectar con YouTube.');
     }
   };
 
